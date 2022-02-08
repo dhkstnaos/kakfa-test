@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class KafkaSampleProducerController {
     @Autowired
     private KafkaSampleProducerService kafkaSampleProducerService;
-    @PostMapping(value = "/sendMessage")
+
+    @PostMapping(value = "/send")
     public void sendMessage(String message) {
         kafkaSampleProducerService.sendMessage(message);
     }

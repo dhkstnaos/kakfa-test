@@ -10,6 +10,7 @@ public class KafkaSampleProducerService {
     private KafkaTemplate<String, String> kafkaTemplate;
     public void sendMessage(String message) {
         System.out.println("send message : " + message);
+
         this.kafkaTemplate.send("ager", message);
     }
 }
