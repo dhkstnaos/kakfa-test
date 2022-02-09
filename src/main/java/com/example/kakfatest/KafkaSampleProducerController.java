@@ -20,10 +20,11 @@ public class KafkaSampleProducerController {
 
     private final KafkaTemplate<String, Message> kafkaTemplate;
 
+    //producer 부분
     @PostMapping(value = "/publish")
     public void sendMessage(@RequestBody Message message) {
-        log.info("Produce message : " + message.toString());
         message.setTimestamp(LocalDateTime.now().toString());
+        log.info("Produce message : " + message.toString());
         try {
             kafkaTemplate.send("kafka-chat", message).get();
         } catch (Exception e) {
@@ -31,6 +32,7 @@ public class KafkaSampleProducerController {
         }
     }
 
+    //여기서 프론트엔드로 메시지를 전송합니다.
     @MessageMapping("/sendMessage")
     @SendTo("/topic/group")
     public Message broadcastGroupMessage(@Payload Message message) {
