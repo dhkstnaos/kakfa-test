@@ -21,12 +21,12 @@ public class KafkaSampleProducerController {
     private final KafkaTemplate<String, Message> kafkaTemplate;
 
     //producer 부분
-    @PostMapping(value = "/publish")
+    @PostMapping
     public void sendMessage(@RequestBody Message message) {
         message.setTimestamp(LocalDateTime.now().toString());
         log.info("Produce message : " + message.toString());
         try {
-            kafkaTemplate.send("kafka-chat", message).get();
+            kafkaTemplate.send(KafkaConstants.KAFKA_TOPIC, message).get();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

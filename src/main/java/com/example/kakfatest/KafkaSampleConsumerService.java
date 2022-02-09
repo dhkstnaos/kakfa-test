@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class KafkaSampleConsumerService {
     private final SimpMessagingTemplate template;
 
-    @KafkaListener(topics = "kafka-chat", groupId = KafkaConstants.GROUP_ID)
+    @KafkaListener(topics = KafkaConstants.KAFKA_TOPIC, groupId = KafkaConstants.GROUP_ID)
     public void listen(Message message) {
         log.info("sending via kafka listener..");
         template.convertAndSend("/topic/group", message);
